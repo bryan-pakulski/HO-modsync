@@ -8,4 +8,3 @@ def hashfile(afile, hasher, blocksize=65536):
         hasher.update(buf)
         buf = afile.read(blocksize)
     return hasher.digest()
-
