@@ -21,7 +21,7 @@ class recieve:
 
         # Server ip is read from a text file, that way only some code has to be added to the eldorito interface to place
         # server ip into this text file
-        self.ip = open('ip.txt', 'w+')
+        self.ip = open('ip.txt', 'r')
 
         self.host = self.ip.readline()
         self.ip.close()
