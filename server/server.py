@@ -20,7 +20,12 @@ class broadcast:
         self.s.bind((self.host, self.port))        # Bind to the port
 
         # Get server public ip
-        self.my_ip = urlopen('http://ip.42.pl/raw').read()
+        try:
+            self.my_ip = urlopen('http://ip.42.pl/raw').read()
+        except:
+            print("Can't find valid ip, closing")
+            sys.exit()
+
         print('Starting server on ' + self.my_ip + ' on port ' + str(self.port) + '\n')
 
         print('Compressing mods folder\n')
@@ -30,10 +35,12 @@ class broadcast:
     def broadcastML(self):
 
         self.s.listen(50)                           # Now wait for client connection
-        self.f = open('server/mods.zip','rb')
-        self.i = 0
 
         while True:
+
+            self.f = open('server/mods.zip','rb')
+            self.i = 0
+
             self.c, self.addr = self.s.accept()     # Establish connection with client
             print 'Got connection from', self.addr
 
@@ -63,6 +70,6 @@ if __name__ == '__main__':
             sys.exit()
 
         except:
-            os.remove('server/mods.zip')
+            #os.remove('server/mods.zip')
             print('Server shutdown unexpectedly\n')
             sys.exit()
