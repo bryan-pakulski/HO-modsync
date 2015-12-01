@@ -36,6 +36,7 @@ class recieve:
     def recieveML(self):
 
         self.f = open('client/mods.zip','w+')
+        self.i = 0
 
         try:
             self.s.connect((self.host, self.port))
@@ -48,6 +49,8 @@ class recieve:
         while (l):
             self.f.write(l)
             l = self.s.recv(1024)
+            self.i += 0.1024
+            print 'Downloading File mods.zip %d%%kb\r'%self.i,
         self.f.close()
 
         self.s.close                     # Close the socket when done
@@ -79,6 +82,7 @@ if __name__ == "__main__":
     try:
         main()
         print("Server mods recieved\n")
-        os.remove('client/mods.zip')
+        sys.exit()
     except:
         os.remove('client/mods.zip')
+        sys.exit()

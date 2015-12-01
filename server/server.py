@@ -1,16 +1,23 @@
 __author__ = 'bryanp'
 
-import socket,shutil, os, hashlib
+import socket,shutil, os, hashlib, sys
 
 class broadcast:
 
     def __init__(self):
+
+        # make a mods folder if it doesn't exist
+        try:
+            os.mkdir('server/mods')
+        except:
+            pass
 
         self.s = socket.socket()                   # Create a socket object
         self.host = socket.gethostname()           # Get local machine name
         self.port = 49491                          # Reserve a port for your service
         self.s.bind((self.host, self.port))        # Bind to the port
 
+        print('Compressing mods folder')
         shutil.make_archive('server/mods', 'zip', 'server/mods')
 
     # This function returns the hash value of a file
@@ -38,8 +45,8 @@ class broadcast:
             print 'Got connection from', self.addr
 
             l = self.f.read(1024)
+            print 'Sending mod files to', self.addr
             while (l):
-                print 'Sending mod files to', self.addr
                 self.c.send(l)
                 l = self.f.read(1024)
             self.f.close()
@@ -52,12 +59,16 @@ if __name__ == '__main__':
     server = broadcast()
     hash = server.hash()
 
-    print('server is running\n')
+    while True:
 
-    try:
-        server.broadcastML()
-        print('File sent\n')
+        print('server is running\n')
 
-    except:
-        os.remove('server/mods.zip')
-        print('Server shutdown unexpectedly\n')
+        try:
+            server.broadcastML()
+            print('File sent\n')
+            sys.exit()
+
+        except:
+            os.remove('server/mods.zip')
+            print('Server shutdown unexpectedly\n')
+            sys.exit()
