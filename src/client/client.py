@@ -1,6 +1,6 @@
 __author__ = 'bryanp'
 
-import hashlib, socket, zipfile, os, sys, shutil, select
+import socket, zipfile, os, sys, shutil, select
 
 
 class recieve:

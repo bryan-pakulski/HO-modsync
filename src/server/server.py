@@ -1,6 +1,6 @@
 __author__ = 'bryanp'
 
-import socket,shutil, os, hashlib, sys
+import socket,shutil, os, sys
 from urllib2 import urlopen
 
 class broadcast:
