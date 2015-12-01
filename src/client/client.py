@@ -17,8 +17,12 @@ class recieve:
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Create a socket object
         self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-        # TODO Add a hook here to allow the client to be given the server ip
-        self.host = "120.155.94.243"
+        # Server ip is read from a text file, that way only some code has to be added to the eldorito interface to place
+        # server ip into this text file
+        self.ip = open('ip.txt', 'w+')
+
+        self.host = self.ip.readline()
+        self.ip.close()
         self.port = 49491 # Reserve a port for your service.
 
     def recieveML(self):
@@ -47,13 +51,6 @@ class recieve:
         self.f.close()
 
         self.s.close()                       # Close the socket when done
-
-
-    def checkhash(self):
-
-        self.Dhash = hash()
-        self.Ohash = 12 #TODO get original hash from server
-
 
     def extractmods(self):
 
