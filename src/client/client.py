@@ -16,7 +16,9 @@ class recieve:
 
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Create a socket object
         self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.host = "120.155.94.243" #socket.gethostbyname('localhost')#
+
+        # TODO Add a hook here to allow the client to be given the server ip
+        self.host = "120.155.94.243"
         self.port = 49491 # Reserve a port for your service.
 
     def recieveML(self):
