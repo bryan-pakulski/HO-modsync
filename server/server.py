@@ -13,6 +13,7 @@ class broadcast:
             pass
 
         self.s = socket.socket()                   # Create a socket object
+        self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.host = socket.gethostname()           # Get local machine name
         self.port = 49491                          # Reserve a port for your service
         self.s.bind((self.host, self.port))        # Bind to the port
@@ -37,7 +38,7 @@ class broadcast:
     # This function broadcasts the server mods and hash to connected peers
     def broadcastML(self):
 
-        self.s.listen(5)                           # Now wait for client connection
+        self.s.listen(50)                           # Now wait for client connection
         self.f = open('server/mods.zip','rb')
 
         while True:

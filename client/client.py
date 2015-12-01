@@ -15,6 +15,7 @@ class recieve:
             os.mkdir('client/mods')
 
         self.s = socket.socket()         # Create a socket object
+        self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.host = socket.gethostname() # Get local machine name
         self.port = 49491                # Reserve a port for your service.
 
