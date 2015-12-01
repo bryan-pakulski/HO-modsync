@@ -19,21 +19,6 @@ class recieve:
         self.host = "120.155.94.243" #socket.gethostbyname('localhost')#
         self.port = 49491 # Reserve a port for your service.
 
-
-    # This function returns the hash value of a file
-    def hash(self, blocksize=65536):
-
-        hasher = hashlib.sha256()
-        afile = open('client/mods.zip', 'rb')
-        buf = afile.read(blocksize)
-
-        while len(buf) > 0:
-            hasher.update(buf)
-            buf = afile.read(blocksize)
-
-        return hasher.digest()
-
-
     def recieveML(self):
 
         self.f = open('client/mods.zip','w+')

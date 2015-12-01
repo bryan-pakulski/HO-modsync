@@ -26,20 +26,6 @@ class broadcast:
         print('Compressing mods folder\n')
         shutil.make_archive('server/mods', 'zip', 'server/mods')
 
-    # This function returns the hash value of a file
-    def hash(self, blocksize=65536):
-
-        hasher = hashlib.sha256()
-        afile = open('server/mods.zip', 'rb')
-        buf = afile.read(blocksize)
-
-        while len(buf) > 0:
-            hasher.update(buf)
-            buf = afile.read(blocksize)
-
-        afile.close()
-        return hasher.digest()
-
     # This function broadcasts the server mods and hash to connected peers
     def broadcastML(self):
 
@@ -66,7 +52,6 @@ class broadcast:
 if __name__ == '__main__':
 
     server = broadcast()
-    hash = server.hash()
 
     while True:
 
