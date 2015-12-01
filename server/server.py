@@ -40,18 +40,18 @@ class broadcast:
 
         self.s.listen(50)                           # Now wait for client connection
         self.f = open('server/mods.zip','rb')
+        self.i = 0
 
         while True:
             self.c, self.addr = self.s.accept()     # Establish connection with client
             print 'Got connection from', self.addr
 
             l = self.f.read(1024)
-            self.i = 0
             print 'Sending mod files to', self.addr
             while (l):
                 self.c.send(l)
-                self.i += (1024/8) / 1024
-                print 'Uploading file mods.zip %dkb\r'%self.i
+                self.i += 1
+                print 'Uploading file mods.zip %dkb\r'%self.i,
                 l = self.f.read(1024)
             self.f.close()
             print 'Done sending mods to', self.addr, '\n'

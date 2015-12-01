@@ -53,10 +53,10 @@ class recieve:
             self.s.setblocking(0)
             ready = select.select([self.s], [], [], 5)
             if ready[0]:
-                l = self.s.recv(4096)
+                l = self.s.recv(1024)
 
-            self.i += (1024/8) / 1024
-            print 'Downloading file mods.zip %dkb\r'%self.i
+            self.i += 1
+            print 'Downloading file mods.zip %dkb\r'%self.i,
         self.f.close()
 
         self.s.close()                       # Close the socket when done
