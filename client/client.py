@@ -14,10 +14,10 @@ class recieve:
         except:
             os.mkdir('client/mods')
 
-        self.s = socket.socket()         # Create a socket object
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Create a socket object
         self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.host = socket.gethostname() # Get local machine name
-        self.port = 49491                # Reserve a port for your service.
+        self.host = "120.155.94.243" #socket.gethostbyname('localhost')#
+        self.port = 49491 # Reserve a port for your service.
 
 
     # This function returns the hash value of a file

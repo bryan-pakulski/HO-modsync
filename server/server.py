@@ -1,6 +1,7 @@
 __author__ = 'bryanp'
 
 import socket,shutil, os, hashlib, sys
+from urllib2 import urlopen
 
 class broadcast:
 
@@ -12,13 +13,17 @@ class broadcast:
         except:
             pass
 
-        self.s = socket.socket()                   # Create a socket object
+        self.s = socket.socket() # Create a socket object
         self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.host = socket.gethostname()           # Get local machine name
+        self.host = ''
         self.port = 49491                          # Reserve a port for your service
         self.s.bind((self.host, self.port))        # Bind to the port
 
-        print('Compressing mods folder')
+        # Get server public ip
+        self.my_ip = urlopen('http://ip.42.pl/raw').read()
+        print('Starting server on ' + self.my_ip + ' on port ' + str(self.port) + '\n')
+
+        print('Compressing mods folder\n')
         shutil.make_archive('server/mods', 'zip', 'server/mods')
 
     # This function returns the hash value of a file
@@ -65,7 +70,7 @@ if __name__ == '__main__':
 
     while True:
 
-        print('server is running\n')
+        print('Server is running\n')
 
         try:
             server.broadcastML()
