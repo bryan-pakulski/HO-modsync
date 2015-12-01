@@ -9,10 +9,10 @@ class recieve:
 
         # Delete all old mods
         try:
-            shutil.rmtree('client/mods')
-            os.mkdir('client/mods')
+            shutil.rmtree('mods')
+            os.mkdir('mods')
         except:
-            os.mkdir('client/mods')
+            os.mkdir('mods')
 
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Create a socket object
         self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -21,7 +21,7 @@ class recieve:
 
     def recieveML(self):
 
-        self.f = open('client/mods.zip','w+')
+        self.f = open('mods.zip','w+')
         self.i = 0
 
         try:
@@ -41,7 +41,7 @@ class recieve:
                 l = self.s.recv(1024)
 
             self.i += 1
-            print 'Downloading file mods.zip %dkb\r'%self.i,
+            print ('Downloading file mods.zip %d kb\r'%self.i),
         self.f.close()
 
         self.s.close()                       # Close the socket when done
@@ -56,8 +56,8 @@ class recieve:
     def extractmods(self):
 
         print('Extracting server mods\n')
-        with zipfile.ZipFile('client/mods.zip', "r") as z:
-            z.extractall('client/mods')
+        with zipfile.ZipFile('mods.zip', "r") as z:
+            z.extractall('mods')
 
 
 # Main function
@@ -75,5 +75,5 @@ if __name__ == "__main__":
         print("Server mods recieved\n")
         sys.exit()
     except:
-        os.remove('client/mods.zip')
+        os.remove('mods.zip')
         sys.exit()

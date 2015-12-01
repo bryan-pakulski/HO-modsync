@@ -9,7 +9,7 @@ class broadcast:
 
         # make a mods folder if it doesn't exist
         try:
-            os.mkdir('server/mods')
+            os.mkdir('mods')
         except:
             pass
 
@@ -29,7 +29,7 @@ class broadcast:
         print('Starting server on ' + self.my_ip + ' on port ' + str(self.port) + '\n')
 
         print('Compressing mods folder\n')
-        shutil.make_archive('server/mods', 'zip', 'server/mods')
+        shutil.make_archive('mods', 'zip', 'mods')
 
     # This function broadcasts the server mods and hash to connected peers
     def broadcastML(self):
@@ -38,7 +38,7 @@ class broadcast:
 
         while True:
 
-            self.f = open('server/mods.zip','rb')
+            self.f = open('mods.zip','rb')
             self.i = 0
 
             self.c, self.addr = self.s.accept()     # Establish connection with client
@@ -49,7 +49,7 @@ class broadcast:
             while (l):
                 self.c.send(l)
                 self.i += 1
-                print 'Uploading file mods.zip %dkb\r'%self.i,
+                print('Uploading file mods.zip %d kb\r'%self.i),
                 l = self.f.read(1024)
             self.f.close()
             print 'Done sending mods to', self.addr, '\n'
@@ -70,6 +70,6 @@ if __name__ == '__main__':
             sys.exit()
 
         except:
-            #os.remove('server/mods.zip')
+            os.remove('mods.zip')
             print('Server shutdown unexpectedly\n')
             sys.exit()
