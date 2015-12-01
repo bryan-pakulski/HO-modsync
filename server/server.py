@@ -45,14 +45,17 @@ class broadcast:
             print 'Got connection from', self.addr
 
             l = self.f.read(1024)
+            self.i = 0
             print 'Sending mod files to', self.addr
             while (l):
                 self.c.send(l)
+                self.i += (1024/8) / 1024
+                print 'Uploading file mods.zip %dkb\r'%self.i
                 l = self.f.read(1024)
             self.f.close()
             print 'Done sending mods to', self.addr, '\n'
 
-            self.c.close()                          # Close the connection
+            self.c.close()                           # Close the connection
 
 if __name__ == '__main__':
 

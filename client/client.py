@@ -1,6 +1,6 @@
 __author__ = 'bryanp'
 
-import hashlib, socket, zipfile, os, sys, shutil
+import hashlib, socket, zipfile, os, sys, shutil, select
 
 
 class recieve:
@@ -48,12 +48,17 @@ class recieve:
         l = self.s.recv(1024)
         while (l):
             self.f.write(l)
-            l = self.s.recv(1024)
-            self.i += 0.1024
-            print 'Downloading File mods.zip %d%%kb\r'%self.i,
+
+            self.s.setblocking(0)
+            ready = select.select([self.s], [], [], 5)
+            if ready[0]:
+                l = self.s.recv(4096)
+
+            self.i += (1024/8) / 1024
+            print 'Downloading file mods.zip %dkb\r'%self.i
         self.f.close()
 
-        self.s.close                     # Close the socket when done
+        self.s.close()                       # Close the socket when done
 
 
     def checkhash(self):
