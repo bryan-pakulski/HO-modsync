@@ -83,5 +83,5 @@ if __name__ == "__main__":
         print("Server mods recieved\n")
         sys.exit()
     except:
-        os.remove('mods.zip')
+        #os.remove('mods.zip')
         sys.exit()
