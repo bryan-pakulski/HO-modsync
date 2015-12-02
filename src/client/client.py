@@ -37,7 +37,7 @@ class recieve:
     def recieveML(self):
 
         # Create our empty zip folder
-        self.f = open('mods.zip','w+')
+        self.f = open('mods.zip','wb')
         self.i = 0 # Size counter for our file
 
         # Attempt to connect to the server

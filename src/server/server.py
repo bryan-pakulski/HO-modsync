@@ -44,14 +44,14 @@ class broadcast:
             self.c, self.addr = self.s.accept()
             print 'Got connection from', self.addr
 
-            l = self.f.read(1024)
+            l = self.f.read(256)
             print 'Sending mod files to', self.addr
-            # Send data to client in 1024 byte chunks
+            # Send data to client in 256 byte chunks
             while (l):
                 self.c.send(l)
                 self.i += 1
                 print('Uploading file mods.zip %d kb\r'%self.i),
-                l = self.f.read(1024)
+                l = self.f.read(256)
             self.f.close()
             print 'Done sending mods to', self.addr, '\n'
 
