@@ -8,11 +8,6 @@ class recieve:
 
     def __init__(self):
 
-        # Check if ip file exists, if not create it
-        if os.path.isfile('ip') == False:
-            self.ip = open('ip', 'w+')
-            self.ip.close()
-
         # Delete all old mods
         try:
             shutil.rmtree('mods')
@@ -26,6 +21,10 @@ class recieve:
 
         # Server ip is read from a file, that way only some code has to be added to the eldorito interface to place
         # server ip into this file
+        print('Input ip i.e. 128.199.243.112: ')
+        with open('ip', 'w') as self.ip:
+            self.ip.write(str(raw_input()))
+            self.ip.close()
         self.ip = open('ip', 'r')
 
         self.host = self.ip.readline()
@@ -85,13 +84,12 @@ if __name__ == "__main__":
         client.extractmods()
 
 
-        print("Server mods recieved\n")
-        sys.exit()
+        print('Server mods recieved\n')
+        os.remove('mods.zip')
+        print('Program closed successfully')
+        exit(0)
+
     except:
-        try:
-            os.remove('mods.zip')
-            print('Program closed successfully\n')
-            sys.exit()
-        except:
-            print('An error occured deleting the mods.zip file, may have to be removed manually, shutting down')
-            sys.exit()
+
+        print('An error occured deleting the mods.zip file, may have to be removed manually, shutting down')
+        exit(1)
