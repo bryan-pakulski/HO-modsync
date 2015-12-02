@@ -12,4 +12,4 @@ Place mods into the mod folder with the server executable (if it's not there run
 As for clients for now you have to manually connect to the server ip, but once input it will download all the server mods and extract them into the client mod folder
 
 # NOTE:
-All the folders and such will be generated on runtim, don't worry if they aren't there initially
+All the folders and such will be generated on runtime, don't worry if they aren't there initially
