@@ -74,6 +74,10 @@ if __name__ == '__main__':
             sys.exit()
 
         except:
-            os.remove('mods.zip')
-            print('Server shutdown unexpectedly\n')
-            sys.exit()
+            try:
+                os.remove('mods.zip')
+                print('Program closed successfully\n')
+                sys.exit()
+            except:
+                print('An error occured deleting the mods.zip file, may have to be removed manually, shutting down')
+                sys.exit()
