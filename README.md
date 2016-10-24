@@ -1,4 +1,4 @@
-# HO-modhash
+# HO-modsync
 A python application being designed for halo online. It's purpose is to be run on a server where it will make sure all users have the same mods as each other and if not download them from the server host.
 
 # How to use it
